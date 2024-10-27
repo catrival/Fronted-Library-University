@@ -3,9 +3,12 @@ import Swal from "sweetalert2";
 import LoginForm from "./LoginForm";
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { login } from '../../features/context/authSlice';
 
 export default function LoginAccess() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -27,6 +30,7 @@ export default function LoginAccess() {
         const decoded = jwt_decode(token);
         const userInfo = jwt_decode(token);
         localStorage.setItem('user', JSON.stringify(userInfo));
+        dispatch(login());
       }
       Swal.fire({
         position: "center",
@@ -41,7 +45,7 @@ export default function LoginAccess() {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "Error al iniciar sesión "+ error,
+        title: "Error al iniciar sesión " + error,
         showConfirmButton: false,
         timer: 1500,
       });
