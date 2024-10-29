@@ -27,7 +27,6 @@ export default function LoginAccess() {
       const token = response.data.token;
       if (token) {
         localStorage.setItem('token', token);
-        const decoded = jwt_decode(token);
         const userInfo = jwt_decode(token);
         localStorage.setItem('user', JSON.stringify(userInfo));
         dispatch(login());

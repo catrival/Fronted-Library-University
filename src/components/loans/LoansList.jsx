@@ -38,7 +38,7 @@ export default function LoansList() {
     else if (isError) return (<div>Error: {error.message} </div>)
 
     return (
-        <div className="py-8 px-10 h-screen">
+        <div className="py-8 px-10 h-full">
             <table className="table-auto w-full">
                 <thead>
                     <tr className="bg-slate-500">

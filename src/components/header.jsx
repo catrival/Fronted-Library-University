@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { logout } from "../features/context/authSlice";
+import { useDispatch } from "react-redux";
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <nav className="bg-gray-800 text-white py-4 flex justify-between items-center">
@@ -35,9 +43,11 @@ export default function Header() {
             Crear Prestamos
           </Link>
         </li>
-
       </ul>
-
+      <button onClick={handleLogout} className="mr-8 hover:text-blue-500">
+        {" "}
+        <FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión{" "}
+      </button>
     </nav>
   );
 }
