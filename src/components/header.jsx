@@ -4,6 +4,7 @@ import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../features/context/authSlice";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import jwt_decode from 'jwt-decode';
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -12,10 +13,10 @@ export default function Header() {
     dispatch(logout());
   };
   useEffect(() => {
-    const storedValue = localStorage.getItem("user");
-    if (storedValue) {
-      const parsedValue = JSON.parse(storedValue);
-      setRole(parsedValue.Role);
+    const token = localStorage.getItem("token");
+    if (token) {
+      const userInfo = jwt_decode(token);
+      setRole(userInfo.Role);
     }
   }, []);
 

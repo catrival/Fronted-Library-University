@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import LoginForm from "./LoginForm";
 import axios from "axios";
-import jwt_decode from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/context/authSlice';
 
@@ -27,8 +26,6 @@ export default function LoginAccess() {
       const token = response.data.token;
       if (token) {
         localStorage.setItem('token', token);
-        const userInfo = jwt_decode(token);
-        localStorage.setItem('user', JSON.stringify(userInfo));
         dispatch(login());
       }
       Swal.fire({
