@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import {
@@ -9,10 +9,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function BooksList() {
-  const { data: books, isLoading, isError, error } = useGetBooksQuery();
+  const { data: books = [], isLoading, isError, error } = useGetBooksQuery();
   const [deleteBook] = useDeleteBookMutation();
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredBooks, setFilteredBooks] = useState(books);
+  const [filteredBooks, setFilteredBooks] = useState(books || []);
 
   const handleDelete = (book) => {
     Swal.fire({
@@ -28,6 +28,10 @@ export default function BooksList() {
       }
     });
   };
+
+  useEffect(() => {
+    setFilteredBooks(books);
+    }, [books])
 
   const handleSearch = (event) => {
     const term = event.target.value;
