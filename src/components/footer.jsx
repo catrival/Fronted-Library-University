@@ -28,7 +28,7 @@ export default function Footer() {
                     </span>
                 </a>
             </div>
-            <h2 className="text-white">Desarrollador por Julian Cristancho</h2>
+            <h2 className="text-white">Desarrollado por estudiantes ibero</h2>
         </div>
     );
 }
