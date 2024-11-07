@@ -10,7 +10,6 @@ export default function LoansFormCreate() {
   const [createLoan] = useCreateLoanMutation();
   const { data: students } = useGetStudentsQuery();
   const { data: books } = useGetBooksQuery();
-  console.log(students);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

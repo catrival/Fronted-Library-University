@@ -12,7 +12,7 @@ export default function StudentsFormCreate() {
     const newUser = {
       name: e.target.name.value,
       email: e.target.email.value,
-      dni: e.target.dni.value,
+      password: e.target.password.value,
     };
     try {
       const response = await createStudent(newUser);

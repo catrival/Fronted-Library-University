@@ -16,7 +16,7 @@ export const studentsSlice = createApi({
     }), // Hace las veces de Axios
     endpoints: (builder) => ({
         getStudents: builder.query({
-            query: () => '/Students',
+            query: () => '/Users',
             providesTags: ['Students'], // Me permite ejecutar un llamado
             transformResponse: response => response.sort((a, b) => 
              (a.name[0].toUpperCase() < b.name[0].toUpperCase()) ? -1 
@@ -28,7 +28,7 @@ export const studentsSlice = createApi({
         }),
         createStudent: builder.mutation({
             query: (newStudent) => ({
-                url: '/Students',
+                url: '/Auth/register',
                 method: 'POST',
                 body: newStudent
             }),
@@ -36,7 +36,7 @@ export const studentsSlice = createApi({
         }),
         updateStudent: builder.mutation({
             query: (student) => ({
-                url: `/Students/${student.id}`,
+                url: `/Users/${student.id}`,
                 method: 'PUT',
                 body: student
             }),
@@ -44,7 +44,7 @@ export const studentsSlice = createApi({
         }),
         deleteStudent: builder.mutation({
             query: (id) => ({
-                url: `/Students/${id}`,
+                url: `/Users/${id}`,
                 method: "DELETE",
             }),
             invalidatesTags: ["Students"]

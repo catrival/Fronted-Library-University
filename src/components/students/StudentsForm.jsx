@@ -1,7 +1,6 @@
 /** Componente reutilizable para Crear y Actualizar un Usuario */
 export default function StudentsForm({props}){
     const { handleSubmit, student } = props
-    console.log(student);
     return (
         <div className="max-w-md w-full mx-auto px-5 py-5 h-screen">
             <form onSubmit={handleSubmit} className="shadow-md rounded pt-6 pb-10 mb-4 px-10 mt-3">
@@ -17,7 +16,7 @@ export default function StudentsForm({props}){
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 font-bold mb-2">DNI</label>
-                    <input type="number" required name="dni" placeholder="DNI" defaultValue={student?.dni}
+                    <input type="number" required name="password" placeholder="DNI" defaultValue={student?.password}
                         className="shadow appearance-none border-gray-400 rounded-lg p-2 w-full focus:shadow-outline" />
                 </div>
                 <div className="flex justify-center">
