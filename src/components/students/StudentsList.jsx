@@ -39,7 +39,6 @@ export default function StudentsList() {
                     <tr className="bg-slate-500">
                         <th className="px-4 py-2 text-white">Name</th>
                         <th className="px-4 py-2 text-white">Email</th>
-                        <th className="px-4 py-2 text-white">Idetification</th>
                         <th className="px-4 py-2 text-white">Actions</th>
                     </tr>
                 </thead>
@@ -48,7 +47,6 @@ export default function StudentsList() {
                         <tr key={user._id}>
                             <td className="border-y-2 px-4 py-2">{user.name}</td>
                             <td className="border-y-2 px-4 py-2">{user.email}</td>
-                            <td className="border-y-2 px-4 py-2">{user.dni}</td>
                             <td className="border-y-2 px-4 py-2">
                                 <div className="flex flex-row justify-center" role="group">
                                     <Link to={`/student/${user.id}`}
