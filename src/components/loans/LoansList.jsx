@@ -33,7 +33,7 @@ export default function LoansList() {
       setRole(userInfo.Role);
       setId(userInfo.Id);
     }
-  }, []); 
+  }, []);
 
   const handleDelete = (loan) => {
     Swal.fire({
@@ -83,12 +83,12 @@ export default function LoansList() {
             <th className="px-4 py-2 text-white">Date Expired</th>
             <th className="px-4 py-2 text-white">Student</th>
             <th className="px-4 py-2 text-white">Book</th>
-            <th className="px-4 py-2 text-white">Actions</th>
+            {userRol === "ADMIN" && <th className="px-4 py-2 text-white">Actions</th>}
           </tr>
         </thead>
         <tbody className="bg-gray-200 text-center">
           {loans
-          .filter((loan) => userRol === 'ADMIN' || loan.student_Id === parseInt(userId))
+            .filter((loan) => userRol === 'ADMIN' || loan.student_Id === parseInt(userId))
             .map((loan) => (
               <tr key={loan.id}>
                 <td className="border-y-2 px-4 py-2">
@@ -99,7 +99,7 @@ export default function LoansList() {
                 </td>
                 <td className="border-y-2 px-4 py-2">{loan.studentName}</td>
                 <td className="border-y-2 px-4 py-2">{loan.bookName}</td>
-                <td className="border-y-2 px-4 py-2">
+                {userRol === "ADMIN" && <td className="border-y-2 px-4 py-2">
                   <div className="flex flex-row justify-center" role="group">
                     <Link
                       to={`/loan/${loan.id}`}
@@ -148,7 +148,7 @@ export default function LoansList() {
                       </svg>
                     </button>
                   </div>
-                </td>
+                </td>}
               </tr>
             ))}
         </tbody>

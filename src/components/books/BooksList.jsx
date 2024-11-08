@@ -7,12 +7,15 @@ import {
 } from "../../features/api/bookSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import jwt_decode from 'jwt-decode';
 
 export default function BooksList() {
   const { data: books = [], isLoading, isError, error } = useGetBooksQuery();
   const [deleteBook] = useDeleteBookMutation();
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBooks, setFilteredBooks] = useState(books || []);
+  const [role, setRole] = useState(null);
+
 
   const handleDelete = (book) => {
     Swal.fire({
@@ -31,7 +34,13 @@ export default function BooksList() {
 
   useEffect(() => {
     setFilteredBooks(books);
-    }, [books])
+
+    const token = localStorage.getItem("token");
+    if (token) {
+      const userInfo = jwt_decode(token);
+      setRole(userInfo.Role);
+    }
+  }, [books])
 
   const handleSearch = (event) => {
     const term = event.target.value;
@@ -94,7 +103,7 @@ export default function BooksList() {
             <th className="px-4 py-2 text-white">Name</th>
             <th className="px-4 py-2 text-white">ISBN</th>
             <th className="px-4 py-2 text-white">Color</th>
-            <th className="px-4 py-2 text-white text-center">Actions</th>
+            {role === "ADMIN" && <th className="px-4 py-2 text-white text-center">Actions</th>}
           </tr>
         </thead>
         <tbody className="bg-gray-200 ">
@@ -104,7 +113,7 @@ export default function BooksList() {
                 <td className="border-y-2 px-4 py-2">{book.name}</td>
                 <td className="border-y-2 px-4 py-2">{book.isbn}</td>
                 <td className="border-y-2 px-4 py-2">{book.color}</td>
-                <td className="border-y-2 px-4 py-2">
+                {role === "ADMIN" && <td className="border-y-2 px-4 py-2">
                   <div className="flex flex-row justify-center" role="group">
                     <Link
                       to={`/book/${book.id}`}
@@ -148,7 +157,7 @@ export default function BooksList() {
                       </svg>
                     </button>
                   </div>
-                </td>
+                </td>}
               </tr>
             ))
           ) : (
