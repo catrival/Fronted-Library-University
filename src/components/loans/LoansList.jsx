@@ -14,6 +14,7 @@ import {
   useGetBooksQuery,
 } from "../../features/api/bookSlice";
 import { useEffect, useState } from "react";
+import jwt_decode from 'jwt-decode';
 
 export default function LoansList() {
   /** Obtiene el estado de una variable con Redux */
@@ -24,14 +25,16 @@ export default function LoansList() {
   const { data: books } = useGetBooksQuery();
   const [userId, setId] = useState(null);
   const [userRol, setRole] = useState(null);
+
   useEffect(() => {
-    const storedValue = localStorage.getItem("user");
-    if (storedValue) {
-      const parsedValue = JSON.parse(storedValue);
-      setId(parsedValue.Id);
-      setRole(parsedValue.Role);
+    const token = localStorage.getItem("token");
+    if (token) {
+      const userInfo = jwt_decode(token);
+      setRole(userInfo.Role);
+      setId(userInfo.Id);
     }
-  }, []);
+  }, []); 
+
   const handleDelete = (loan) => {
     Swal.fire({
       title: `¿Estas seguro que deseas eliminar el Usuario ${loan.name} ${loan.lastname}?`,
@@ -76,19 +79,23 @@ export default function LoansList() {
       <table className="table-auto w-full">
         <thead>
           <tr className="bg-slate-500">
-            <th className="px-4 py-2 text-white">Date</th>
+            <th className="px-4 py-2 text-white">Date Create</th>
+            <th className="px-4 py-2 text-white">Date Expired</th>
             <th className="px-4 py-2 text-white">Student</th>
             <th className="px-4 py-2 text-white">Book</th>
             <th className="px-4 py-2 text-white">Actions</th>
           </tr>
         </thead>
-        <tbody className="bg-gray-200 ">
+        <tbody className="bg-gray-200 text-center">
           {loans
-            .filter((loan) => userRol === "ADMIN" || loan.userId === userId)
+          .filter((loan) => userRol === 'ADMIN' || loan.student_Id === parseInt(userId))
             .map((loan) => (
               <tr key={loan.id}>
                 <td className="border-y-2 px-4 py-2">
                   {Moment(loan.created).format("YYYY-MM-DD")}
+                </td>
+                <td className="border-y-2 px-4 py-2">
+                  {Moment(loan.expireDate).format("YYYY-MM-DD")}
                 </td>
                 <td className="border-y-2 px-4 py-2">{loan.studentName}</td>
                 <td className="border-y-2 px-4 py-2">{loan.bookName}</td>

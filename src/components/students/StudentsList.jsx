@@ -33,7 +33,7 @@ export default function StudentsList() {
     else if (isError) return (<div>Error: {error.message} </div>)
 
     return (
-        <div className="py-8 px-10 h-full">
+        <div className="py-8 px-10 h-full text-center">
             <table className="table-auto w-full">
                 <thead>
                     <tr className="bg-slate-500">
