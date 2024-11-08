@@ -12,6 +12,9 @@ import ProtectedRoute from "./Routes/ProtectedRoute";
 import ProtectedRouteLogged from "./Routes/ProtectedRouteLogged";
 import { Navigate } from 'react-router-dom';
 import AuthLayout from "./components/layouts/AuthLayout";
+import LoansFormEdit from "./components/loans/LoansFormEdit";
+import BooksFormEdit from "./components/books/BooksFormEdit";
+import StudentsFormEdit from "./components/students/StudentsFormEdit";
 
 
 function App() {
@@ -26,9 +29,12 @@ function App() {
           <Route index element={<Navigate to={"/books"} />} />
           <Route path="/student" element={<StudentsList />} />
           <Route path="/create-student" element={<StudentsFormCreate />} />
+          <Route path="/student/:id" element={<StudentsFormEdit />} />
           <Route path="/books" element={<BooksList />} />
+          <Route path="/book/:id" element={<BooksFormEdit />} />
           <Route path="/create-book" element={<BooksFormCreate />} />
           <Route path="/loans" element={<LoansList />} />
+          <Route path="/loan/:id" element={<LoansFormEdit />} />
           <Route path="/create-loan" element={<LoansFormCreate />} />
         </Route>
       </Routes>

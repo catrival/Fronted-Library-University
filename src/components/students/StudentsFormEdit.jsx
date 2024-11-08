@@ -17,7 +17,6 @@ export default function StudentsFormEdit() {
       id: params.id, // Seteamos en _id por el que me llega como parametro
       name: e.target.name.value,
       email: e.target.email.value,
-      dni: e.target.dni.value,
     };
     try {
       const response = await updateStudent(user);
@@ -85,6 +84,6 @@ export default function StudentsFormEdit() {
   else if (isError) return <div>Error: {error.message} </div>;
 
   return (
-    <StudentsForm props={{ handleSubmit: handleSubmit, student: student }} />
+    <StudentsForm props={{ handleSubmit: handleSubmit, student: student, edit: true }} />
   );
 }

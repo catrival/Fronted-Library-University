@@ -23,7 +23,7 @@ export const studentsSlice = createApi({
             : (a.name[0].toUpperCase() > b.name[0].toUpperCase())  ? 1 : 0)
         }),
         getStudentById: builder.query({
-            query: (_id) => '/Students/' + _id,
+            query: (_id) => '/Users/' + _id,
             providesTags: ['Student']
         }),
         createStudent: builder.mutation({
